@@ -6,20 +6,21 @@ namespace csharp_personal_project.tests.BusinessLogic
     public class GardenAreaServiceTests
 	{
         private GardenAreaService _underTestService;
-        private Mock<ISurfaceCalculator> _surfaceCalculator;
 
         [SetUp]
         public void Setup()
         {
-            _surfaceCalculator = new Mock<ISurfaceCalculator>();
-            _underTestService = new GardenAreaService(_surfaceCalculator.Object);
+			MetricSurfaceCalculator metricSurfaceCalculator = new MetricSurfaceCalculator();
+            _underTestService = new GardenAreaService(metricSurfaceCalculator);
         }
 
         [Test]
         public void GivenGardenAreaService_WhenGetGardenAreaIsCalledWithValidData_ThenAMetricAreaIsReturned()
         {
             var result = _underTestService.GetGardenArea();
-            Assert.AreEqual(8, result.SurfaceArea);
+			System.Diagnostics.Debug.WriteLine("result.SurfaceArea: ", result.SurfaceArea);
+
+			Assert.That(result.SurfaceArea, Is.EqualTo(8));
         }
     }
 }
