@@ -16,22 +16,29 @@ namespace csharp_personal_project.tests.BusinessLogic
 			_imperialSurfaceCalculator = new Mock<ImperialSurfaceCalculator>();
 		}
 
-        [Test]
-        public void GivenGardenAreaService_WhenGetGardenAreaIsCalledWithValidData_ThenAMetricAreaIsReturned()
+		[TestCase(0, 2, ExpectedResult = 0)]
+		[TestCase(3, 0, ExpectedResult = 0)]
+		[TestCase(2, 4, ExpectedResult = 8)]
+		[TestCase(-1, 4, ExpectedResult = 0)]
+		[TestCase(2, -1, ExpectedResult = 0)]
+		[TestCase(2, -1, ExpectedResult = 0)]
+		public double GivenGardenAreaService_WhenGetGardenAreaIsCalledWithValidData_ThenAMetricAreaIsReturned(double length, double width)
         {
 			_underTest = new GardenAreaService(_metricSurfaceCalculator.Object);
-			var result = _underTest.GetGardenArea(2,4);
-
-			Assert.That(result.SurfaceArea, Is.EqualTo(8));
+			return _underTest.GetGardenArea(length,width).SurfaceArea;
         }
 
-		[Test]
-		public void GivenGardenAreaService_WhenGetGardenAreaIsCalledWithValidData_ThenAnImperialAreaIsReturned()
+		[TestCase(0, 2, ExpectedResult = 0)]
+		[TestCase(3, 0, ExpectedResult = 0)]
+		[TestCase(2, 4, ExpectedResult = 86.111199999999997)]
+		[TestCase(-1, 4, ExpectedResult = 0)]
+		[TestCase(2, -1, ExpectedResult = 0)]
+		public double GivenGardenAreaService_WhenGetGardenAreaIsCalledWithValidData_ThenAnImperialAreaIsReturned(double length, double width)
 		{
 			_underTest = new GardenAreaService(_imperialSurfaceCalculator.Object);
-			var result = _underTest.GetGardenArea(2,4);
-
-			Assert.That(result.SurfaceArea, Is.EqualTo(86.111199999999997));
+			return _underTest.GetGardenArea(length, width).SurfaceArea;
 		}
+
+
 	}
 }
