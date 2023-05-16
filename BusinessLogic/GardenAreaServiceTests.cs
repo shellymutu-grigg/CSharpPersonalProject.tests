@@ -5,22 +5,33 @@ namespace csharp_personal_project.tests.BusinessLogic
 {
     public class GardenAreaServiceTests
 	{
-        private GardenAreaService _underTestService;
+        private Mock<MetricSurfaceCalculator> _metricSurfaceCalculator;
+		private Mock<ImperialSurfaceCalculator> _imperialSurfaceCalculator;
+		private GardenAreaService _underTest;
 
-        [SetUp]
+		[SetUp]
         public void Setup()
         {
-			MetricSurfaceCalculator metricSurfaceCalculator = new MetricSurfaceCalculator();
-            _underTestService = new GardenAreaService(metricSurfaceCalculator);
-        }
+			_metricSurfaceCalculator = new Mock<MetricSurfaceCalculator>();
+			_imperialSurfaceCalculator = new Mock<ImperialSurfaceCalculator>();
+		}
 
         [Test]
         public void GivenGardenAreaService_WhenGetGardenAreaIsCalledWithValidData_ThenAMetricAreaIsReturned()
         {
-            var result = _underTestService.GetGardenArea();
-			System.Diagnostics.Debug.WriteLine("result.SurfaceArea: ", result.SurfaceArea);
+			_underTest = new GardenAreaService(_metricSurfaceCalculator.Object);
+			var result = _underTest.GetGardenArea();
 
 			Assert.That(result.SurfaceArea, Is.EqualTo(8));
         }
-    }
+
+		[Test]
+		public void GivenGardenAreaService_WhenGetGardenAreaIsCalledWithValidData_ThenAnImperialAreaIsReturned()
+		{
+			_underTest = new GardenAreaService(_imperialSurfaceCalculator.Object);
+			var result = _underTest.GetGardenArea();
+
+			Assert.That(result.SurfaceArea, Is.EqualTo(86.111199999999997));
+		}
+	}
 }
