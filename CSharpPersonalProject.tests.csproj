@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>csharp_personal_project.tests</RootNamespace>
+    <RootNamespace>CSharpPersonalProject.tests</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\csharp-personal-project\csharp-personal-project.csproj" />
+    <ProjectReference Include="..\CSharpPersonalProject\CSharpPersonalProject.csproj" />
   </ItemGroup>
 
 </Project>

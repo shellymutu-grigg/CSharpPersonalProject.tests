@@ -1,2 +1,2 @@
-# csharp-personal-project.tests
-Unit Tests for csharp-personal-project
+# CSharpPersonalProject.tests
+Unit Tests for CSharpPersonalProject
