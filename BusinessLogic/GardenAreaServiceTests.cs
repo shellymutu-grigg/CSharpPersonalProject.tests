@@ -8,14 +8,12 @@ namespace csharp_personal_project.tests.BusinessLogic
         private Mock<MetricSurfaceCalculator> _metricSurfaceCalculator;
 		private Mock<ImperialSurfaceCalculator> _imperialSurfaceCalculator;
 		private GardenAreaService? _underTest;
-		private Mock<BaseGardenArea> _area;
 
 		[SetUp]
         public void Setup()
         {
 			_metricSurfaceCalculator = new Mock<MetricSurfaceCalculator>();
 			_imperialSurfaceCalculator = new Mock<ImperialSurfaceCalculator>();
-			_area = new Mock<BaseGardenArea>();
 		}
 
 		[TestCase(0, 2, ExpectedResult = 0)]
